@@ -332,6 +332,26 @@ nav a:hover {
         width: 15px;
         height: 15px;
     }
+    
+    .experience-item {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .experience-left {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .company-logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .company-icon {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -391,6 +411,41 @@ nav a:hover {
     
     .education-icon {
         align-self: center;
+    }
+    
+    .experience-item {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .experience-left {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .company-logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .experience-period {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .company-info {
+        text-align: center;
+    }
+    
+    .position-title {
+        font-size: 1.1rem;
+    }
+    
+    .tech-tags {
+        justify-content: center;
     }
     
     .section-title {
@@ -922,3 +977,220 @@ nav a:hover {
     background: linear-gradient(135deg, #f5576c, #f093fb);
     box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
 }
+
+/* Experience Section */
+.experience-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 80px 0;
+    margin-top: 0;
+}
+
+.experience-section .section-title {
+    color: white;
+    margin-bottom: 60px;
+}
+
+.experience-timeline {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.experience-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+}
+
+.experience-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.experience-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.company-logo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.company-logo::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.3;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.company-icon {
+    font-size: 2rem;
+    color: white;
+    filter: brightness(0) invert(1);
+}
+
+.experience-period {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    width: fit-content;
+}
+
+.company-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.position-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2d3748;
+    line-height: 1.3;
+}
+
+.company-name {
+    font-size: 1rem;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.location {
+    font-size: 0.9rem;
+    color: #718096;
+    font-style: italic;
+}
+
+.experience-right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.responsibilities h4,
+.technologies h4 {
+    color: #2d3748;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 8px;
+}
+
+.responsibilities ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.responsibilities li {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.responsibilities li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-tag {
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.tech-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Technology tag colors */
+.tech-tag.python { background: linear-gradient(135deg, #3776ab, #ffd43b); color: white; }
+.tech-tag.js { background: linear-gradient(135deg, #f7df1e, #f5c842); color: #000; }
+.tech-tag.webgl { background: linear-gradient(135deg, #990000, #cc0000); color: white; }
+.tech-tag.pytorch { background: linear-gradient(135deg, #ee4c2c, #ff6b3d); color: white; }
+.tech-tag.iot { background: linear-gradient(135deg, #00b894, #55a3ff); color: white; }
+.tech-tag.ml { background: linear-gradient(135deg, #6c5ce7, #a29bfe); color: white; }
+.tech-tag.audio { background: linear-gradient(135deg, #fd79a8, #fdcb6e); color: white; }
+.tech-tag.websocket { background: linear-gradient(135deg, #4a90e2, #357abd); color: white; }
+.tech-tag.pandas { background: linear-gradient(135deg, #150458, #e70488); color: white; }
+.tech-tag.sklearn { background: linear-gradient(135deg, #f7931e, #3499cd); color: white; }
+.tech-tag.numpy { background: linear-gradient(135deg, #013243, #4dabf7); color: white; }
+.tech-tag.tableau { background: linear-gradient(135deg, #e97627, #1f5582); color: white; }
+.tech-tag.analytics { background: linear-gradient(135deg, #00b894, #00cec9); color: white; }
+.tech-tag.viz { background: linear-gradient(135deg, #fd63a3, #fc9c94); color: white; }
+.tech-tag.r { background: linear-gradient(135deg, #276dc3, #1d4289); color: white; }
+.tech-tag.sql { background: linear-gradient(135deg, #336791, #1a252f); color: white; }
+.tech-tag.excel { background: linear-gradient(135deg, #217346, #107c41); color: white; }
+.tech-tag.ggplot { background: linear-gradient(135deg, #276dc3, #1d4289); color: white; }
+.tech-tag.nlp { background: linear-gradient(135deg, #673ab7, #9c27b0); color: white; }
+.tech-tag.sna { background: linear-gradient(135deg, #e17055, #fdcb6e); color: white; }
+.tech-tag.stats { background: linear-gradient(135deg, #6c5ce7, #a29bfe); color: white; }
+.tech-tag.swift { background: linear-gradient(135deg, #fa7343, #f14a29); color: white; }
+.tech-tag.swiftui { background: linear-gradient(135deg, #007aff, #5ac8fa); color: white; }
+.tech-tag.ios { background: linear-gradient(135deg, #007aff, #34c759); color: white; }
+.tech-tag.xcode { background: linear-gradient(135deg, #1575f9, #0056d3); color: white; }
+.tech-tag.git { background: linear-gradient(135deg, #f05032, #f14e32); color: white; }
+.tech-tag.github { background: linear-gradient(135deg, #24292e, #586069); color: white; }
+.tech-tag.office { background: linear-gradient(135deg, #d83b01, #ff8c00); color: white; }
+.tech-tag.admin { background: linear-gradient(135deg, #636e72, #2d3436); color: white; }
+.tech-tag.support { background: linear-gradient(135deg, #00b894, #00cec9); color: white; }
+.tech-tag.social { background: linear-gradient(135deg, #e84393, #fd79a8); color: white; }
+.tech-tag.docs { background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; }

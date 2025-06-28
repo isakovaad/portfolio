@@ -120,6 +120,84 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Add experience section interactions
+document.addEventListener('DOMContentLoaded', () => {
+    const experienceItems = document.querySelectorAll('.experience-item');
+    
+    experienceItems.forEach(item => {
+        // Add tech tag interactions
+        const techTags = item.querySelectorAll('.tech-tag');
+        techTags.forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Add company logo pulse effect on hover
+        item.addEventListener('mouseenter', function() {
+            const logo = this.querySelector('.company-logo');
+            if (logo) {
+                logo.style.transform = 'scale(1.1) rotate(5deg)';
+                logo.style.boxShadow = '0 15px 35px rgba(102, 126, 234, 0.3)';
+            }
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            const logo = this.querySelector('.company-logo');
+            if (logo) {
+                logo.style.transform = 'scale(1) rotate(0deg)';
+                logo.style.boxShadow = 'none';
+            }
+        });
+        
+        // Add typewriter effect for responsibilities
+        const responsibilityItems = item.querySelectorAll('.responsibilities li');
+        let isVisible = false;
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !isVisible) {
+                    isVisible = true;
+                    responsibilityItems.forEach((li, index) => {
+                        li.style.opacity = '0';
+                        li.style.transform = 'translateX(-20px)';
+                        setTimeout(() => {
+                            li.style.transition = 'all 0.5s ease';
+                            li.style.opacity = '1';
+                            li.style.transform = 'translateX(0)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(item);
+    });
+    
+    // Add click-to-copy functionality for tech tags
+    const techTags = document.querySelectorAll('.tech-tag');
+    techTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            const tagText = this.textContent;
+            navigator.clipboard.writeText(tagText).then(() => {
+                // Visual feedback
+                const originalBg = this.style.background;
+                this.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
+                this.textContent = '✓ Copied!';
+                
+                setTimeout(() => {
+                    this.style.background = originalBg;
+                    this.textContent = tagText;
+                }, 1000);
+            });
+        });
+    });
+});
+
 // Add dynamic particle generation
 function createParticle() {
     const particle = document.createElement('div');
@@ -242,6 +320,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }, observerOptions);
         
         educationObserver.observe(item);
+    });
+    
+    // Animate experience items
+    const experienceItems = document.querySelectorAll('.experience-item');
+    experienceItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(50px)';
+        item.style.transition = 'all 0.8s ease';
+        
+        const experienceObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 200); // Stagger the animations
+                }
+            });
+        }, observerOptions);
+        
+        experienceObserver.observe(item);
     });
 });
 
