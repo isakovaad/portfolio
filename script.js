@@ -12,6 +12,45 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     });
 });
 
+
+// Dynamic navigation color based on section background
+function updateNavigationColor() {
+    const nav = document.querySelector('nav');
+    const sections = [
+        { element: document.getElementById('about'), isLight: false },
+        { element: document.getElementById('education'), isLight: true },
+        { element: document.getElementById('experience'), isLight: false },
+        { element: document.getElementById('projects'), isLight: true },
+        { element: document.getElementById('skills'), isLight: false },
+        { element: document.getElementById('publications'), isLight: true },
+    ];
+
+    const scrollPosition = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+
+    for (let section of sections) {
+        if (section.element) {
+            const rect = section.element.getBoundingClientRect();
+            const sectionTop = rect.top + scrollPosition;
+            const sectionBottom = sectionTop + rect.height;
+
+            // Check if section is currently in viewport
+            if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionBottom - 100) {
+                if (section.isLight) {
+                    nav.classList.add('dark-nav');
+                } else {
+                    nav.classList.remove('dark-nav');
+                }
+                break;
+            }
+        }
+    }
+}
+
+// Add scroll listener for navigation color
+window.addEventListener('scroll', updateNavigationColor);
+document.addEventListener('DOMContentLoaded', updateNavigationColor);
+
 // Add skill item animations and interactions
 document.addEventListener('DOMContentLoaded', () => {
     const skillItems = document.querySelectorAll('.skill-item');
@@ -198,6 +237,93 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Add brain image interactions
+document.addEventListener('DOMContentLoaded', () => {
+    const brainImage = document.querySelector('.brain-image');
+    
+    if (brainImage) {
+        // Add enhanced hover effect
+        brainImage.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-20px) scale(1.1) rotate(-3deg)';
+            this.style.filter = 'drop-shadow(0 25px 50px rgba(240, 147, 251, 0.6)) brightness(1.1)';
+            this.style.transition = 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        });
+        
+        brainImage.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+            this.style.filter = 'drop-shadow(0 15px 30px rgba(240, 147, 251, 0.4))';
+            this.style.transition = 'all 0.4s ease';
+        });
+        
+        // Add click effect
+        brainImage.addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'brainFloat 4s ease-in-out infinite, pulse 2s ease-in-out';
+            }, 100);
+        });
+    }
+});
+
+// Add motto interactions
+document.addEventListener('DOMContentLoaded', () => {
+    const motto = document.querySelector('.motto');
+    
+    if (motto) {
+        // Add typing effect on scroll into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const text = entry.target.textContent;
+                    entry.target.textContent = '';
+                    
+                    let i = 0;
+                    const typeWriter = () => {
+                        if (i < text.length) {
+                            entry.target.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 50);
+                        }
+                    };
+                    
+                    setTimeout(typeWriter, 500);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(motto);
+        
+        // Add click effect for inspiration
+        motto.addEventListener('click', function() {
+            this.style.animation = 'sparkle 1s ease-in-out';
+            this.style.transform = 'scale(1.05)';
+            
+            // Create floating text effect
+            const floatingText = document.createElement('div');
+            floatingText.textContent = '✨ Inspiring! ✨';
+            floatingText.style.position = 'absolute';
+            floatingText.style.top = '-30px';
+            floatingText.style.left = '50%';
+            floatingText.style.transform = 'translateX(-50%)';
+            floatingText.style.color = '#f093fb';
+            floatingText.style.fontWeight = 'bold';
+            floatingText.style.fontSize = '0.9rem';
+            floatingText.style.opacity = '0';
+            floatingText.style.animation = 'floatUp 2s ease-out forwards';
+            
+            this.style.position = 'relative';
+            this.appendChild(floatingText);
+            
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+                this.style.animation = '';
+                floatingText.remove();
+            }, 2000);
+        });
+    }
+});
+
 // Add dynamic particle generation
 function createParticle() {
     const particle = document.createElement('div');
@@ -217,32 +343,37 @@ function createParticle() {
 // Generate particles periodically
 setInterval(createParticle, 3000);
 
-// Add parallax effect to profile image
+// Add parallax effect to profile image and brain
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const parallax = document.querySelector('.profile-image');
+    const brain = document.querySelector('.brain-image');
     const speed = scrolled * 0.2;
-    parallax.style.transform = `translateY(${speed}px)`;
+    
+    if (parallax) parallax.style.transform = `translateY(${speed}px)`;
+    if (brain) brain.style.transform = `translateY(${speed * 0.5}px)`;
 });
 
 // Add typing effect to name
 const nameElement = document.querySelector('.name');
-const originalText = nameElement.textContent;
-nameElement.textContent = '';
+if (nameElement) {
+    const originalText = nameElement.textContent;
+    nameElement.textContent = '';
 
-let i = 0;
-function typeWriter() {
-    if (i < originalText.length) {
-        nameElement.textContent += originalText.charAt(i);
-        i++;
-        setTimeout(typeWriter, 100);
+    let i = 0;
+    function typeWriter() {
+        if (i < originalText.length) {
+            nameElement.textContent += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
     }
-}
 
-// Start typing effect after page load
-window.addEventListener('load', () => {
-    setTimeout(typeWriter, 1000);
-});
+    // Start typing effect after page load
+    window.addEventListener('load', () => {
+        setTimeout(typeWriter, 1000);
+    });
+}
 
 // Add intersection observer for animations
 const observerOptions = {
@@ -350,7 +481,9 @@ document.addEventListener('mousemove', (e) => {
     const mouseY = e.clientY / window.innerHeight;
     
     const bgAnimation = document.querySelector('.bg-animation');
-    bgAnimation.style.backgroundPosition = `${50 + mouseX * 10}% ${50 + mouseY * 10}%`;
+    if (bgAnimation) {
+        bgAnimation.style.backgroundPosition = `${50 + mouseX * 10}% ${50 + mouseY * 10}%`;
+    }
 });
 
 // Add click effect to social links
@@ -406,13 +539,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Add CSS for ripple animation
+// Add CSS for additional animations dynamically
 const style = document.createElement('style');
 style.textContent = `
     @keyframes ripple {
         to {
             transform: scale(4);
             opacity: 0;
+        }
+    }
+    
+    @keyframes floatUp {
+        0% {
+            opacity: 0;
+            transform: translateX(-50%) translateY(0);
+        }
+        50% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-20px);
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-40px);
+        }
+    }
+    
+    @keyframes brainPulse {
+        0%, 100% {
+            transform: scale(1);
+            filter: drop-shadow(0 15px 30px rgba(240, 147, 251, 0.4));
+        }
+        50% {
+            transform: scale(1.05);
+            filter: drop-shadow(0 20px 40px rgba(240, 147, 251, 0.6));
         }
     }
 `;
@@ -443,4 +602,185 @@ document.body.appendChild(scrollProgress);
 window.addEventListener('scroll', () => {
     const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
     scrollProgress.style.width = scrolled + '%';
+});
+
+// Add Easter egg - Brain knowledge tooltip
+document.addEventListener('DOMContentLoaded', () => {
+    const brainImage = document.querySelector('.brain-image');
+    
+    if (brainImage) {
+        let tooltipTimeout;
+        
+        brainImage.addEventListener('mouseenter', function() {
+            clearTimeout(tooltipTimeout);
+            
+            const tooltip = document.createElement('div');
+            tooltip.className = 'brain-tooltip';
+            tooltip.innerHTML = `
+                <div style="
+                    position: absolute;
+                    top: -60px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    font-size: 0.8rem;
+                    white-space: nowrap;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                    z-index: 1000;
+                    opacity: 0;
+                    animation: fadeInTooltip 0.3s ease forwards;
+                ">
+                    🧠 Neural networks + Data science = Magic! ✨
+                </div>
+            `;
+            
+            this.style.position = 'relative';
+            this.appendChild(tooltip);
+        });
+        
+        brainImage.addEventListener('mouseleave', function() {
+            tooltipTimeout = setTimeout(() => {
+                const tooltip = this.querySelector('.brain-tooltip');
+                if (tooltip) {
+                    tooltip.remove();
+                }
+            }, 300);
+        });
+    }
+});
+
+// Add fade in animation for tooltip
+const tooltipStyle = document.createElement('style');
+tooltipStyle.textContent = `
+    @keyframes fadeInTooltip {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+`;
+document.head.appendChild(tooltipStyle);
+
+
+// Enhanced social link interactions
+document.addEventListener('DOMContentLoaded', () => {
+    const socialLinks = document.querySelectorAll('.social-link');
+    
+    socialLinks.forEach(link => {
+        // Add enhanced click feedback
+        link.addEventListener('click', function(e) {
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            ripple.style.left = '50%';
+            ripple.style.top = '50%';
+            ripple.style.width = '20px';
+            ripple.style.height = '20px';
+            ripple.style.marginLeft = '-10px';
+            ripple.style.marginTop = '-10px';
+            
+            this.style.position = 'relative';
+            this.appendChild(ripple);
+            
+            // Add success feedback for email and phone
+            if (this.href.includes('mailto:') || this.href.includes('tel:')) {
+                const originalTooltip = this.getAttribute('data-tooltip');
+                if (this.href.includes('mailto:')) {
+                    this.setAttribute('data-tooltip', 'Email copied!');
+                    
+                    // Copy email to clipboard
+                    navigator.clipboard.writeText('dilbar.isakova@student-cs.fr').then(() => {
+                        setTimeout(() => {
+                            this.setAttribute('data-tooltip', originalTooltip);
+                        }, 2000);
+                    });
+                } else if (this.href.includes('tel:')) {
+                    this.setAttribute('data-tooltip', 'Number copied!');
+                    
+                    // Copy phone to clipboard
+                    navigator.clipboard.writeText('+33 7 68 26 12 66').then(() => {
+                        setTimeout(() => {
+                            this.setAttribute('data-tooltip', originalTooltip);
+                        }, 2000);
+                    });
+                }
+                
+                e.preventDefault(); // Prevent default action for better UX
+            }
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Add mouse enter/leave animations
+        link.addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.25)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.1)';
+        });
+    });
+});
+
+// Contact Form Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Create mailto link
+            const subject = `Message from ${name} via Portfolio`;
+            const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+            const mailtoLink = `mailto:dilbar.isakova@student-cs.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success feedback
+            const sendBtn = this.querySelector('.send-btn');
+            const originalText = sendBtn.innerHTML;
+            sendBtn.innerHTML = '<span class="btn-icon">✅</span>Message Sent!';
+            sendBtn.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
+            
+            // Reset form and button after 3 seconds
+            setTimeout(() => {
+                contactForm.reset();
+                sendBtn.innerHTML = originalText;
+                sendBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            }, 3000);
+        });
+        
+        // Add floating label effect
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    }
 });

@@ -29,18 +29,30 @@
     </nav>
     
     <div class="container">
-        <section class="hero">
+        <section class="hero" id="about">
             <div class="profile-section">
+                <!-- Brain Image
+                <div class="brain-image">
+                    <img src="GregADunn.jpeg" alt="Brain visualization">
+                </div> -->
+                
                 <div class="profile-image">
                     <img src="me.jpeg" alt="Dilbar Isakova">
                 </div>
-                <div class="social-links">
-                    <a href="mailto:dilbar.isakova@student-cs.fr" class="social-link" title="Email">📧</a>
-                    <a href="https://linkedin.com/in/isakovaad" class="social-link" title="LinkedIn">💼</a>
-                    <a href="#" class="social-link" title="GitHub">🐙</a>
-                    <a href="tel:+33768261266" class="social-link" title="Phone">📞</a>
-                    <a href="#" class="social-link" title="Resume">📄</a>
+                
+                <!-- Motto -->
+                <div class="motto">
+                    some lessons have to be experienced before they can be understood
                 </div>
+                
+                <div class="social-links">
+                    <a href="mailto:dilbar.isakova@student-cs.fr" class="social-link" data-tooltip="dilbar.isakova@student-cs.fr">📧</a>
+                    <a href="https://linkedin.com/in/isakovaad" class="social-link" data-tooltip="LinkedIn">💼</a>
+                    <a href="https://github.com/isakovaad" class="social-link" data-tooltip="GitHub">🐙</a>
+                    <a href="tel:+33768261266" class="social-link" data-tooltip="+33 7 68 26 12 66">📞</a>
+                    <!-- <a href="#" class="social-link" data-tooltip="Resume">📄</a> -->
+                </div>
+                
             </div>
             
               <div class="content-section">
@@ -57,7 +69,7 @@ With an ENFJ personality, naturally gravitating toward collaboration and mentors
                     Currently conducting research at <span class="highlight">Inria/LISN</span> on 3D interactive ambient displays and spatial audio analytics. My current work combines deep learning architectures, IoT systems, and real-time data visualization to create impactful technological solutions.
                 </p>
                 
-                <a href="mailto:dilbar.isakova@student-cs.fr" class="cta-button">Get In Touch</a>
+                <!-- <a href="mailto:dilbar.isakova@student-cs.fr" class="cta-button">Get In Touch</a> -->
             </div>
 
 
@@ -218,7 +230,7 @@ With an ENFJ personality, naturally gravitating toward collaboration and mentors
                             <h4>Major & Achievements:</h4>
                             <div class="course-tags">
                                 <span class="course-tag special">Computer Information Technologies</span>
-                                <span class="course-tag special">Forex Trading Using Machine Learning Algorithms</span>
+                                <span class="course-tag special">Theis Topic: Forex Trading Using Machine Learning Algorithms</span>
                                 <span class="course-tag special">Scholarship for Citizens of Central Asian Countries 2018-2022</span>
                             </div>
                         </div>
@@ -269,7 +281,7 @@ With an ENFJ personality, naturally gravitating toward collaboration and mentors
                         <div class="coursework">
                             <h4>Achievements & Courses:</h4>
                             <div class="course-tags">
-                                <span class="course-tag special">2nd place - Airfoil Project</span>
+                                <span class="course-tag special">Airfoil Project was honored with a 2nd place for high research and project development</span>
                                 <span class="course-tag">Calculus</span>
                                 <span class="course-tag">Advanced Programming</span>
                                 <span class="course-tag">Information Systems and Networking</span>
@@ -844,6 +856,117 @@ With an ENFJ personality, naturally gravitating toward collaboration and mentors
         </div>
     </section>
     
+
+    <!-- Publications Section -->
+<section id="publications" class="publications-section">
+    <div class="container">
+        <h2 class="section-title">PUBLICATIONS</h2>
+        <div class="publications-grid">
+            <div class="publication-card">
+                <div class="publication-header">
+                    <div class="publication-type">Research Paper</div>
+                    <div class="publication-year">2024</div>
+                </div>
+                <h3 class="publication-title">Streaming Feature Selection</h3>
+                <div class="publication-authors">
+                    <span class="author-name highlight">Dilbar Isakova</span>, 
+                    <span class="author-name">Linhan Wang</span>
+                </div>
+                <div class="publication-venue">
+                    Research Paper presented on Twelfth European Big Data Management & Analytics Summer School <br>
+                    (eBISS 2024) in University of Padua, Padova, Italy
+                </div>
+                <div class="publication-abstract">
+                    <p>Knowledge discovery for data streaming requires online feature selection to reduce the complexity of real-world datasets and significantly improve the learning process. This paper presents a comprehensive survey of feature selection (FS) algorithms for both static and dynamic environments, providing a detailed taxonomy that categorizes these methods based on search strategy, evaluation process, and feature structure.</p>
+                </div>
+                <div class="publication-keywords">
+                    <span class="keyword">Streaming Feature Selection</span>
+                    <span class="keyword">Big Data</span>
+                    <span class="keyword">Dimensionality Reduction</span>
+                    <span class="keyword">Machine Learning</span>
+                    <span class="keyword">Online Learning</span>
+                </div>
+                <div class="publication-actions">
+                    <a href="https://github.com/isakovaad/Big-Data-Seminars-SFS/blob/main/Big%20Data%20Seminars%20-%20Research%20Paper.pdf" class="publication-btn primary">📄 View PDF</a>
+                    <a href="https://github.com/isakovaad/Big-Data-Seminars-SFS/blob/main/Poster.pdf" class="publication-btn secondary">📋 Poster</a>
+                    <a href="https://github.com/isakovaad/Big-Data-Seminars-SFS/blob/main/References.pdf" class="publication-btn secondary">📊 References</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-content">
+            <div class="contact-form-container">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="send-btn">
+                        <span class="btn-icon">✈️</span>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+            
+            <div class="contact-info-container">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.94722687634!2d2.277020937659888!3d48.85892033651057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis%2C%20France!5e0!3m2!1sen!2sfr!4v1642765234567!5m2!1sen!2sfr"
+                        width="100%" 
+                        height="300" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <div class="contact-social-links">
+                    <a href="mailto:dilbar.isakova@student-cs.fr" class="contact-social-link" data-tooltip="dilbar.isakova@student-cs.fr">
+                        <i class="social-icon">📧</i>
+                    </a>
+                    <a href="https://linkedin.com/in/isakovaad" class="contact-social-link" data-tooltip="LinkedIn">
+                        <i class="social-icon">💼</i>
+                    </a>
+                    <a href="https://github.com/isakovaad" class="contact-social-link" data-tooltip="GitHub">
+                        <i class="social-icon">🐙</i>
+                    </a>
+                    <a href="tel:+33768261266" class="contact-social-link" data-tooltip="+33 7 68 26 12 66">
+                        <i class="social-icon">📞</i>
+                    </a>
+                </div>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-label">Location</div>
+                        <div class="contact-value">Paris, France</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">dilbar.isakova@student-cs.fr <br>
+                        eesaack@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value">+33 7 68 26 12 66</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
     <script src="script.js"></script>
 </body>
 </html>
