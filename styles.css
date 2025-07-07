@@ -1899,3 +1899,42 @@ nav.dark-nav a:hover {
         height: 40px;
     }
 }
+
+/* Projects Section CSS Updates */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1400px; /* Increased from 1200px */
+    margin: 0 auto;
+}
+
+/* Update stats section to reflect 12+ projects */
+.stat-card:first-child .stat-number {
+    content: "12+";
+}
+
+/* Responsive updates for better mobile handling */
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 100%;
+    }
+    
+    .project-card {
+        min-height: 350px;
+    }
+}
+
+/* Ensure consistent card heights */
+.project-card {
+    min-height: 400px;
+}
